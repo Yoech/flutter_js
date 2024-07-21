@@ -43,7 +43,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    namespace "com.befovy.fijkplayer"
+    namespace "net.touchcapture.qr.flutterqr"
     compileSdk 34
 
     defaultConfig {
