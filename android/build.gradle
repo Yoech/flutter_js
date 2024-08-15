@@ -43,7 +43,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    namespace "net.touchcapture.qr.flutterqr"
+    namespace "io.abner.flutter_js"
     compileSdk 34
 
     defaultConfig {
