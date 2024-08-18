@@ -1,8 +1,19 @@
 group 'io.abner.flutter_js'
 version '1.0-SNAPSHOT'
 
+def flutterSdkPath = {
+    def properties = new Properties()
+    file("local.properties").withInputStream { properties.load(it) }
+    def flutterSdkPath = properties.getProperty("flutter.sdk")
+    assert flutterSdkPath != null, "flutter.sdk not set in local.properties"
+    return flutterSdkPath
+}()
+
 buildscript {
-    ext.kotlin_version = "1.9.22"
+    ext {
+        agp_version = '8.5.1'
+        kotlin_version = "1.7.10"
+    }
     repositories {
         google()
         mavenCentral()
@@ -18,12 +29,12 @@ buildscript {
     }
 
     dependencies {
-        classpath("com.android.tools.build:gradle:8.5.1")
+        classpath("com.android.tools.build:gradle:8.5.2")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
 
-rootProject.allprojects {
+allprojects {
     repositories {
         google()
         mavenCentral()
@@ -43,8 +54,17 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    namespace "io.abner.flutter_js"
+    if (project.android.hasProperty("namespace")) {
+        namespace "io.abner.flutter_js"
+    }
+
     compileSdk 34
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+        encoding = "UTF-8"
+    }
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
@@ -60,17 +80,31 @@ android {
     // }    
 
     defaultConfig {
-        minSdkVersion 21
+        minSdk = 21
         ndk {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
         }
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-        encoding = "UTF-8"
+
+    dependencies {
+        testImplementation("org.jetbrains.kotlin:kotlin-test")
+        testImplementation("org.mockito:mockito-core:5.0.0")
+        compileOnly files("$flutterSdkPath/bin/cache/artifacts/engine/android-arm/flutter.jar")
     }
+
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+
+            testLogging {
+                events "passed", "skipped", "failed", "standardOut", "standardError"
+                outputs.upToDateWhen {false}
+                showStandardStreams = true
+            }
+        }
+    }
+
     lintOptions {
         disable 'InvalidPackage'
         disable 'GradleDependency'
@@ -91,5 +125,6 @@ dependencies {
 
     // for serve library from jitpack repository
     implementation "com.github.fast-development.android-js-runtimes:fastdev-jsruntimes-quickjs:0.3.5"
+    implementation 'androidx.annotation:annotation-jvm:1.8.2'
     // implementation "com.github.fast-development.android-js-runtimes:fastdev-jsruntimes-jsc:0.1.3"
 }
