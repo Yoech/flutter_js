@@ -2,5 +2,6 @@
     "files.associations": {
         "future": "cpp"
     },
-    "java.configuration.updateBuildConfiguration": "disabled"
+    "java.configuration.updateBuildConfiguration": "disabled",
+    "java.compile.nullAnalysis.mode": "disabled"
 }
