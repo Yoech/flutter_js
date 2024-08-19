@@ -12,7 +12,7 @@ def flutterSdkPath = {
 buildscript {
     ext {
         agp_version = '8.5.1'
-        kotlin_version = "1.9.25"
+        kotlin_version = "2.0.0"
     }
     repositories {
         google()
@@ -90,7 +90,7 @@ android {
     dependencies {
         testImplementation("org.jetbrains.kotlin:kotlin-test")
         testImplementation("org.mockito:mockito-core:5.0.0")
-//        compileOnly files("${flutterSdkPath}/bin/cache/artifacts/engine/android-x64/flutter.jar")
+        compileOnly files("${flutterSdkPath}/bin/cache/artifacts/engine/android-x64/flutter.jar")
     }
 
     testOptions {
