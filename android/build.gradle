@@ -17,15 +17,15 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven { url=uri('https://jitpack.io') }
-        maven { url=uri('https://maven.aliyun.com/nexus/content/groups/public/') }
-        maven { url=uri('https://maven.aliyun.com/repository/google') }
-        maven { url=uri('https://maven.aliyun.com/repository/gradle-plugin') }
-        maven { url=uri('https://maven.aliyun.com/repository/jcenter') }
-        maven { url=uri('https://maven.aliyun.com/repository/central') }
-        maven { url=uri('https://maven.aliyun.com/repository/public') }
-        maven { url=uri('https://download.flutter.io') }
-        maven { url=uri('https://storage.flutter-io.cn/download.flutter.io') }
+        maven { url = uri('https://jitpack.io') }
+        maven { url = uri('https://maven.aliyun.com/nexus/content/groups/public/') }
+        maven { url = uri('https://maven.aliyun.com/repository/google') }
+        maven { url = uri('https://maven.aliyun.com/repository/gradle-plugin') }
+        maven { url = uri('https://maven.aliyun.com/repository/jcenter') }
+        maven { url = uri('https://maven.aliyun.com/repository/central') }
+        maven { url = uri('https://maven.aliyun.com/repository/public') }
+        maven { url = uri('https://download.flutter.io') }
+        maven { url = uri('https://storage.flutter-io.cn/download.flutter.io') }
     }
 
     dependencies {
@@ -38,15 +38,15 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven { url=uri('https://jitpack.io') }
-        maven { url=uri('https://maven.aliyun.com/nexus/content/groups/public/') }
-        maven { url=uri('https://maven.aliyun.com/repository/google') }
-        maven { url=uri('https://maven.aliyun.com/repository/gradle-plugin') }
-        maven { url=uri('https://maven.aliyun.com/repository/jcenter') }
-        maven { url=uri('https://maven.aliyun.com/repository/central') }
-        maven { url=uri('https://maven.aliyun.com/repository/public') }
-        maven { url=uri('https://download.flutter.io') }
-        maven { url=uri('https://storage.flutter-io.cn/download.flutter.io') }
+        maven { url = uri('https://jitpack.io') }
+        maven { url = uri('https://maven.aliyun.com/nexus/content/groups/public/') }
+        maven { url = uri('https://maven.aliyun.com/repository/google') }
+        maven { url = uri('https://maven.aliyun.com/repository/gradle-plugin') }
+        maven { url = uri('https://maven.aliyun.com/repository/jcenter') }
+        maven { url = uri('https://maven.aliyun.com/repository/central') }
+        maven { url = uri('https://maven.aliyun.com/repository/public') }
+        maven { url = uri('https://download.flutter.io') }
+        maven { url = uri('https://storage.flutter-io.cn/download.flutter.io') }
     }
 }
 
@@ -54,9 +54,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    if (project.android.hasProperty("namespace")) {
-        namespace "io.abner.flutter_js"
-    }
+    namespace "io.abner.flutter_js"
 
     compileSdk 34
 
@@ -99,7 +97,7 @@ android {
 
             testLogging {
                 events "passed", "skipped", "failed", "standardOut", "standardError"
-                outputs.upToDateWhen {false}
+                outputs.upToDateWhen { false }
                 showStandardStreams = true
             }
         }
@@ -118,7 +116,7 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    
+
     // implementation using platform-channel with oasis jsbridge
     // implementation 'com.github.p7s1digital.oasis-jsbridge-android:oasis-jsbridge-quickjs:0.12.0'
     // compile group: 'org.nanohttpd', name: 'nanohttpd', version: '2.3.0'
