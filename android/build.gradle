@@ -56,6 +56,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
         encoding = "UTF-8"
+
+        // Flag to enable support for the new language APIs
+        coreLibraryDesugaringEnabled true
     }
 
     kotlinOptions {
@@ -108,7 +111,8 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // For AGP 7.4+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
 
     // implementation using platform-channel with oasis jsbridge
     // implementation 'com.github.p7s1digital.oasis-jsbridge-android:oasis-jsbridge-quickjs:0.12.0'
@@ -116,6 +120,6 @@ dependencies {
 
     // for serve library from jitpack repository
     implementation "com.github.fast-development.android-js-runtimes:fastdev-jsruntimes-quickjs:0.3.5"
-    implementation 'androidx.annotation:annotation-jvm:1.8.2'
+    // implementation 'androidx.annotation:annotation-jvm:1.8.2'
     // implementation "com.github.fast-development.android-js-runtimes:fastdev-jsruntimes-jsc:0.1.3"
 }
